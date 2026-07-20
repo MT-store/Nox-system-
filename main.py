@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+import os
 
 intents = discord.Intents.all()
 
@@ -12,4 +13,6 @@ bot = commands.Bot(
 async def on_ready():
     print(f"تم تشغيل البوت: {bot.user}")
 
-bot.run("TOKEN")
+TOKEN = os.getenv("TOKEN")
+
+bot.run(TOKEN)
