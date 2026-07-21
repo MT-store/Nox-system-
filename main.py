@@ -25,9 +25,13 @@ bot = commands.Bot(
     intents=intents
 )
 
+
 @bot.event
 async def on_ready():
-    await bot.load_extension("tickets")
+    if not hasattr(bot, "loaded"):
+        await bot.load_extension("tickets")
+        bot.loaded = True
+
     print(f"تم تشغيل البوت: {bot.user}")
 
 
