@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import os
+import asyncio
 from flask import Flask
 from threading import Thread
 
@@ -26,17 +27,13 @@ bot = commands.Bot(
 )
 
 
-@bot.event
-async def on_ready():
-    if not hasattr(bot, "loaded"):
-        await bot.load_extension("tickets")
-        bot.loaded = True
+async def main():
+    await bot.load_extension("tickets")
 
-    print(f"تم تشغيل البوت: {bot.user}")
+    keep_alive()
+
+    TOKEN = os.getenv("TOKEN")
+    await bot.start(TOKEN)
 
 
-keep_alive()
-
-TOKEN = os.getenv("TOKEN")
-
-bot.run(TOKEN)
+asyncio.run(main())
