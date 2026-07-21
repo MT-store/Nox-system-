@@ -21,17 +21,14 @@ def keep_alive():
 intents = discord.Intents.all()
 
 bot = commands.Bot(
-    command_prefix="-",
+    command_prefix="!",
     intents=intents
 )
 
 @bot.event
 async def on_ready():
-    print(f"تم تشغيل البوت: {bot.user}")
-
-
-async def load_extensions():
     await bot.load_extension("tickets")
+    print(f"تم تشغيل البوت: {bot.user}")
 
 
 keep_alive()
